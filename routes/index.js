@@ -20,10 +20,21 @@ exports.index = function(req, res){
   res.render('index', { title: 'Express' });
 };
 
+exports.requestPost = function(req, res) {
+	var request = {
+		name: req.body.name | "",
+		email: req.body.email | "",
+		message: req.body.message | ""
+	};
+
+	res.send(request);
+
+};
+
 exports.send = function(req, res) {
 	smtpTransport.sendMail({
 	   from: "Arecord.us <nodejs@arecord.us>", // sender address
-	   to: receiver.join(",")
+	   to: receiver.join(","),
 	   subject: "Hello ✔", // Subject line
 	   text: "Hello world ✔" // plaintext body
 	}, function(error, response){
