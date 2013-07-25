@@ -73,7 +73,7 @@ exports.requestPost = function(req, res) {
 	var message = request.email + "<br/>" + request.name + "<br/>" + request.message;
 	var subject = "[Arecord.us]" + request.email + "send a request";
 
-	//sendMail(receiver, subject, message);
+	sendMail(receiver, subject, message);
 	saveUser(request);
 
 };
