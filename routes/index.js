@@ -22,27 +22,31 @@ exports.index = function(req, res){
 
 exports.requestPost = function(req, res) {
 	var request = {
-		name: req.body.name | "",
-		email: req.body.email | "",
-		message: req.body.message | ""
+		name: req.body.name || "",
+		email: req.body.email || "",
+		message: req.body.message || ""
 	};
 
 	res.send(request);
 
-};
+	if (request.email == "") {
+		return res.send("Eamil Error");
+	}
 
-exports.send = function(req, res) {
+	res.send("POST success");
+	var message = request.email + "<br/>" + request.name + "<br/>" + request.message;
+
 	smtpTransport.sendMail({
 	   from: "Arecord.us <nodejs@arecord.us>", // sender address
 	   to: receiver,
-	   subject: "Hello ✔", // Subject line
-	   text: "Hello world ✔" // plaintext body
+	   subject: "[Arecord.us]" + request.email + "send a request", // Subject line
+	   text: message
 	}, function(error, response){
 	   if(error){
 	       console.log(error);
 	   }else{
-	       console.log("Message sent: " + response.message);
-	       res.send(response.message);
+	       console.log(message);
 	   }
 	});
+
 };
