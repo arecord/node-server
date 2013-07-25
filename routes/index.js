@@ -5,7 +5,7 @@
 
 var config = require("../config");
 var mailCfg = config.mail;
-var receiver = config.receiver;
+var receiver = JSON.parse(config.receiver);
 var mandrill = require('node-mandrill')(config.mandrill);
 
 var sendMail = function (to, subject, message) {
@@ -13,8 +13,8 @@ var sendMail = function (to, subject, message) {
 	//send an e-mail to jim rubenstein
 	mandrill('/messages/send', {
 	    message: {
-	        to: [{email: 'nodejs@arecord.us', name: 'Arecord.us'}],
-	        from_email: to,
+	        to: to,
+	        from_email: "nodejs@arecord.us",
 	        subject: subject, // Subject line
 	        text: message
 	    }
