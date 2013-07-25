@@ -5,16 +5,31 @@
 
 
 var nodemailer = require("nodemailer");
-var mailCfg = require("../config").mail;
-var receiver = require("../config").receiver;
+var config = require("../config");
+var mailCfg = config.mail;
+var receiver = config.receiver;
+var mandrill = require('node-mandrill')(config.mandrill);
 
-var smtpTransport = nodemailer.createTransport("SMTP",{
-   service: "Gmail",
-   auth: {
-       user: mailCfg.user,
-       pass: mailCfg.password
-   }
-});
+var sendMail = function (to, subject, message) {
+
+	//send an e-mail to jim rubenstein
+	mandrill('/messages/send', {
+	    message: {
+	        to: [{email: 'nodejs@arecord.us', name: 'Arecord.us'}],
+	        from_email: to,
+	        subject: subject, // Subject line
+	        text: message
+	    }
+	}, function(error, response)
+	{
+	    //uh oh, there was an error
+	    if (error) console.log( JSON.stringify(error) );
+
+	    //everything's good, lets see what mandrill said
+	    else console.log(response);
+	});
+
+};
 
 exports.index = function(req, res){
   res.render('index', { title: 'Express' });
@@ -35,18 +50,8 @@ exports.requestPost = function(req, res) {
 
 	res.send("POST success");
 	var message = request.email + "<br/>" + request.name + "<br/>" + request.message;
+	var subject = "[Arecord.us]" + request.email + "send a request";
 
-	smtpTransport.sendMail({
-	   from: "Arecord.us <nodejs@arecord.us>", // sender address
-	   to: receiver,
-	   subject: "[Arecord.us]" + request.email + "send a request", // Subject line
-	   text: message
-	}, function(error, response){
-	   if(error){
-	       console.log(error);
-	   }else{
-	       console.log(message);
-	   }
-	});
+	sendMail(receiver, subject, message);
 
 };

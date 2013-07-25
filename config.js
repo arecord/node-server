@@ -6,6 +6,7 @@
  */
 
 var cfg = {
+  "mandrill": process.env.mandrill,
   "mail": {
     "user": process.env.emailuser,
     "password" : process.env.emailpwd
