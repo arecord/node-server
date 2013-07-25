@@ -65,10 +65,12 @@ exports.requestPost = function(req, res) {
 	// res.send(request);
 
 	if (request.email == "") {
-		return res.send("Eamil Error");
+		return res.send("Eamil Error, link back to http://arecord.us");
 	}
 
-	res.send("POST success");
+	res.redirect("http://arecord.us");
+
+	//res.send("POST success");
 
 	var message = request.email + "<br/>" + request.name + "<br/>" + request.message;
 	var subject = "[Arecord.us]" + request.email + "send a request";
