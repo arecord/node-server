@@ -6,6 +6,7 @@
  */
 
 var cfg = {
+  "mongo": process.env.mongo,
   "mandrill": process.env.mandrill,
   "mail": {
     "user": process.env.emailuser,
