@@ -6,6 +6,7 @@
 
 var nodemailer = require("nodemailer");
 var mailCfg = require("../config").mail;
+var receiver = require("../config").receiver;
 
 var smtpTransport = nodemailer.createTransport("SMTP",{
    service: "Gmail",
@@ -22,7 +23,7 @@ exports.index = function(req, res){
 exports.send = function(req, res) {
 	smtpTransport.sendMail({
 	   from: "Arecord.us <nodejs@arecord.us>", // sender address
-	   to: "caesar chi <clonncd@gmail.com>", // comma separated list of receivers
+	   to: receiver.join(",")
 	   subject: "Hello ✔", // Subject line
 	   text: "Hello world ✔" // plaintext body
 	}, function(error, response){
