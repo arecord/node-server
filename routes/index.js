@@ -3,8 +3,6 @@
  * GET home page.
  */
 
-
-var nodemailer = require("nodemailer");
 var config = require("../config");
 var mailCfg = config.mail;
 var receiver = config.receiver;
