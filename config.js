@@ -7,8 +7,8 @@
 
 var cfg = {
   "mail": {
-    "user": "user@user.com"
-    "password" : "---"
+    "user": "xxxx",
+    "password" : "oxoxoxo"
   }
 };
 
