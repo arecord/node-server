@@ -7,7 +7,7 @@
 
 var cfg = {
   "mail": {
-    "user": process.env.emailuser
+    "user": process.env.emailuser,
     "password" : process.env.emailpwd
   },
   receiver: process.env.receiver
