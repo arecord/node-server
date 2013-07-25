@@ -34,7 +34,7 @@ exports.requestPost = function(req, res) {
 exports.send = function(req, res) {
 	smtpTransport.sendMail({
 	   from: "Arecord.us <nodejs@arecord.us>", // sender address
-	   to: receiver.join(","),
+	   to: receiver,
 	   subject: "Hello ✔", // Subject line
 	   text: "Hello world ✔" // plaintext body
 	}, function(error, response){
