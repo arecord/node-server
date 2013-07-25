@@ -7,12 +7,10 @@
 
 var cfg = {
   "mail": {
-    "user": "xxxx",
-    "password" : "oxoxoxo"
+    "user": process.env.emailuser
+    "password" : process.env.emailpwd
   },
-  receiver = [
-    "user <user@user.com>",
-  ]
+  receiver: process.env.receiver
 };
 
 module.exports = cfg;
