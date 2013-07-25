@@ -7,7 +7,7 @@ var userSchema = {
   message:  'string'
 };
 
-mongoose.connect();
+mongoose.connect(mongoCfg);
 
 var userSchema = new mongoose.Schema(userSchema);
 var User = mongoose.model('Users', userSchema);
